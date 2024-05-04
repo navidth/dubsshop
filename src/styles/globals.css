@@ -352,7 +352,7 @@ nav-left a:hover .icons,
 }
 
 /* ....................................................................................................... */
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 480px) {
   .nav-center {
     display: none;
   }
@@ -366,7 +366,6 @@ nav-left a:hover .icons,
   }
   .navbartop{
     display: flex !important;
-    flex-direction: row-reverse;
   }
   .nav-left {
     display: flex;
