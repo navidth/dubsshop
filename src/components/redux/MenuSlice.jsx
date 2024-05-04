@@ -23,5 +23,5 @@ const menuSlice = createSlice({
   },
 })
 
-export const {toggleMenu, clickAction,hoverAction} = menuSlice.actions
+export const {toggleMenu, clickAction} = menuSlice.actions
 export default menuSlice.reducer

@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FormDataSchemaLogin } from "@/app/lib/shema";
-import { addEntry } from "@/app/lib/actions/_action";
+import { addEntry } from "@/app/lib/actions/_actionUsers";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
+import { useSelector, useDispatch } from "react-redux";
 
 type Inputs = z.infer<typeof FormDataSchemaLogin>;
 
@@ -21,26 +23,33 @@ function Register() {
   } = useForm<Inputs>({
     resolver: zodResolver(FormDataSchemaLogin),
   });
+
   // Login.............................................
   const processForm: SubmitHandler<Inputs> = async (data: Inputs) => {
     const resualt = await addEntry(data);
-    if (!resualt) {
-      console.log("errorssssssssssssss");
+    if (resualt?.success) {
+      toast.success("ورود با موفقیت انجام شد ", {
+        position: "top-right",
+      });
+      localStorage.setItem("session", JSON.stringify(resualt.success));
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000)
       return;
     }
-    if (resualt.success) {
-      console.log(resualt.success);
-      return;
-    }
+    toast.error(resualt?.data, {
+      position: "top-right",
+    });
     reset();
-  };
+  }
 
   return (
     <div className="login-page  mx-auto pt-2 pb-3">
       <div className=" my-5 form-page">
         <div className="rounded-4 form-page-div1">
           <div className="form-content mt-5">
-            <div className="login-content border shadow border-danger-subtile bg-white"
+            <div
+              className="login-content border shadow border-danger-subtile bg-white"
               id="login-content"
             >
               <div className="header-form">
@@ -93,6 +102,7 @@ function Register() {
                   ورود
                 </button>
               </form>
+              <ToastContainer />
             </div>
             <div className="register text-white  d-flex flex-column align-items-center justify-content-center">
               <div className="headerRegister my-4">

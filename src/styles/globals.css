@@ -129,8 +129,7 @@ nav-left a:hover .icons,
   font-weight: 700;
   color: black;
 }
-.slide1 .flex-column {
-}
+
 .bg-center {
   background-position: center;
 }
@@ -352,7 +351,7 @@ nav-left a:hover .icons,
 }
 
 /* ....................................................................................................... */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 426px) {
   .nav-center {
     display: none;
   }
@@ -366,6 +365,7 @@ nav-left a:hover .icons,
   }
   .navbartop{
     display: flex !important;
+    flex-direction: row-reverse;
   }
   .nav-left {
     display: flex;

@@ -1,25 +1,28 @@
 "use client";
-
 import { Tooltip } from "react-tooltip";
 import { BsPersonCircle, BsCart3 } from "react-icons/bs";
-import { BiSearchAlt2,BiLogInCircle } from "react-icons/bi";
-import { useRef, useState} from "react";
-import { AiOutlineClose} from "react-icons/ai";
+import { BiSearchAlt2, BiLogInCircle } from "react-icons/bi";
+import { useEffect, useRef, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "../CartProduct";
+import {sessions} from "@/utils/isLoginIn"
 
 function LoginCart() {
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const productCount = products.reduce(
     (sum, product) => sum + product.quantity,
     0
   );
+  let sumProducts = products.map((product) => product.totalPirce);
+
   //func for searchbox................................................
   const [search, setSearch] = useState("");
   const searchBoxRef = useRef(null);
@@ -73,7 +76,12 @@ function LoginCart() {
         <BsCart3 size={"25px"} className="icons bsbuy icons-buy"></BsCart3>
       </button>
       {/* Modal cart */}
-      <Modal show={showModal} onHide={handleShowModal} className="rounded-4">
+      <Modal
+        show={showModal}
+        size="md"
+        onHide={handleShowModal}
+        className="rounded-4"
+      >
         <Modal.Header closeButton closeVariant="black" className="d-flex">
           <Modal.Title className="mx-2 fs-3 fw-700">سبد خرید</Modal.Title>
         </Modal.Header>
@@ -82,7 +90,7 @@ function LoginCart() {
             maxHeight: "220px",
             overflow: "hidden",
             overflowY: "scroll",
-            padding: "20px",
+            padding: "20px 8px",
             paddingRight: "0px !important",
           }}
         >
@@ -103,7 +111,10 @@ function LoginCart() {
               <span className="fw-bold">مجموع کل خرید :</span>
               <span>
                 {numberWithCommas(
-                  products && products.map((i) => i.totalPirce)
+                  sumProducts &&
+                    sumProducts.reduce((prev, current) => {
+                      return prev + current;
+                    }, 0)
                 )}
               </span>
             </div>
@@ -114,17 +125,29 @@ function LoginCart() {
         </Modal.Footer>
       </Modal>
       {/* login or register */}
-      <Link
-        href={"/login"}
-        data-tooltip-content="عضویت"
-        data-tooltip-id="my-tooltip"
-        className=" tt btn "
-      >
-        <BiLogInCircle
-          size={"27px"}
-          className="icons icons-login"
-        ></BiLogInCircle>
-      </Link>
+      {sessions ? (
+        <Link
+          href={"/dashboard/"}
+          data-tooltip-content="پنل کاربری"
+          data-tooltip-id="my-tooltip"
+          className=" tt btn "
+        >
+          <BsPersonCircle size={"27px"} className="icons icons-login" />
+        </Link>
+      ) : (
+        <Link
+          href={"/login"}
+          data-tooltip-content="ورود | عضویت"
+          data-tooltip-id="my-tooltip"
+          className=" tt btn "
+        >
+          <BiLogInCircle
+            size={"27px"}
+            className="icons icons-login"
+          ></BiLogInCircle>
+        </Link>
+      )}
+
       <div className="overlay" id="searchbox" ref={searchBoxRef}>
         <button type="button" className="btn btnclose" onClick={closeSearch}>
           <AiOutlineClose

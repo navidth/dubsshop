@@ -55,8 +55,8 @@ a {
   white-space: nowrap;
 }
 #dashbord-svg:hover {
-  transition: transform 0.3s;
-  transform: translateY(-5px);
+  transition: color 0.3s;
+  color: var(--bs-danger);
 }
 .body-product section {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);

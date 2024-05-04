@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import Navigation from "../components/navigation/index";
 import Footer from "@/components/Footer";
 import Providers from '@/components/redux/Provider'
+import { ToastContainer } from "react-toastify";
+import"react-toastify/ReactToastify.css"
 
 export const metadata: Metadata = {
   title: "فروشگاه دابس",
@@ -21,29 +23,12 @@ export default async function RootLayout({
   return (
     <html lang="fa">
       <head>
-        <link rel="shortcut icon" href="../../public/favicon/favicon.ico" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="../../public/favicon/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="../../public/favicon/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="../../public/favicon/favicon-16x16.png"
-        />
-        <link rel="manifest" href="../../public/favicon/site.webmanifest" />
+      <link rel="shortcut icon" href="https://codebazan.ir/wp-content/uploads/2019/01/mm.jpg" type="image/x-icon" />
       </head>
       <body className={` ${Iransens.className}`}>
         <Providers>
           <Navigation />
+          <ToastContainer />
           {children}
           <Footer />
         </Providers>

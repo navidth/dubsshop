@@ -27,22 +27,22 @@ function PriceRange() {
        </div>
         <div className="d-flex flex-column mx-3 mt-4"> 
         <div className="col-6 " >
-        <div className="price-box">
-            <label className='text-secondary'> از</label><br />
-            <span id='min-price' className='ms-2'>{minprice.toLocaleString("fa-IR")}</span><br />
-            <span className='toman'>تومان</span>
+        <div className="price-box ">
+            <label className='text-secondary fw-semibold'> از</label><br />
+            <span id='min-price' className='ms-2 fw-bold'>{minprice.toLocaleString("fa-IR")}</span><br />
+            <span className='toman fw-semibold'>تومان</span>
         </div>
         </div>
-        <Slider className='slider bg-secondary-subtle'
+        <Slider className='slider bg-secondary-subtle mt-3'
             value={minprice}
             min={0}
             max={25800000}
             onChange={handlePriceChange}
             />
-            <div className="col-6 ">
-                <div className="price-box">
+            <div className="col-6 mt-2">
+                <div className="price-box fw-semibold">
                     <label className='text-text-secondary'>تا </label><br />
-                    <span id='max-price' className='ms-2'>{maxprice.toLocaleString("fa-IR")}</span><br />
+                    <span id='max-price' className='ms-2 fw-bold'>{maxprice.toLocaleString("fa-IR")}</span><br />
                     <span className='toman'>تومان</span>
                 </div>
             </div>
@@ -53,7 +53,7 @@ function PriceRange() {
             max={25800000}
             min={0}
             />
-                        <div className="mx-auto">
+            <div className="mx-auto">
               <button className='btn btn-danger px-5 py-2 my-3 fw-bold'>جستجو کردن</button>
             </div>
         </div>

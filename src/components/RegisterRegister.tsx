@@ -2,9 +2,11 @@
 import { z } from "zod";
 import { FormDataShemaRegister } from "@/app/lib/shema";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { addEntryRegister } from "@/app/lib/actions/_action";
+import { addEntryRegister } from "@/app/lib/actions/_actionUsers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 type InputsRegister = z.infer<typeof FormDataShemaRegister>;
 
@@ -12,19 +14,31 @@ function Register() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<InputsRegister>({
     resolver: zodResolver(FormDataShemaRegister),
   });
   const router = useRouter();
-  const redirect = () => {
-    router.push("/");
-  };
+
   const onRegister: SubmitHandler<InputsRegister> = async (
     data: InputsRegister
   ) => {
     const resualt: any = await addEntryRegister(data);
-    router.push("/");
+    if (resualt?.success) {
+      toast.success(resualt?.data, {
+        position: "top-right",
+      });
+      localStorage.setItem("session", JSON.stringify(resualt.success));
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000);
+      return;
+    }
+    toast.error(resualt?.data, {
+      position: "top-right",
+    });
+    reset();
   };
 
   return (
@@ -102,6 +116,7 @@ function Register() {
                   عضویت
                 </button>
               </form>
+              <ToastContainer />
             </div>
           </div>
         </div>
