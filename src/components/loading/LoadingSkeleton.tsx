@@ -1,7 +1,6 @@
 import React from "react";
 import "../../styles/skeleton.css";
 import Moshavere from "../Moshavere";
-import ResualtCat from "../ResualtCat";
 import PriceRange from "../PriceBox";
 
 function LoadingSkeleton() {

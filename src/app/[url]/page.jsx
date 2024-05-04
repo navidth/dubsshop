@@ -4,7 +4,6 @@ import Sortby from "@/components/Sortby";
 import Moshavere from "@/components/Moshavere";
 import PriceRange from "@/components/PriceBox";
 import ResualtCat from "@/components/ResualtCat";
-import { resualtCat } from "@/app/lib/actions/resualtCat";
 import Api from '@/utils/api'
 
 async function ProductShop({ params }) {

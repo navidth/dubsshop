@@ -1,14 +1,10 @@
 "use server";
-import { z } from "zod";
 import { FormDataSchemaLogin, FormDataShemaRegister } from "../shema";
 import { User } from "../models/userModels";
 import bcrypt from "bcrypt";
 
 
-type Inputs = z.infer<typeof FormDataSchemaLogin>;
-type InputsRegister = z.infer<typeof FormDataShemaRegister>;
-
-export async function addEntry(data: Inputs) {
+export async function addEntry(data) {
 
   const resualt = FormDataSchemaLogin.safeParse(data);
   if (resualt.success) {
@@ -34,7 +30,7 @@ export async function addEntry(data: Inputs) {
   }
 }
 
-export async function addEntryRegister(data: InputsRegister) {
+export async function addEntryRegister(data) {
   const resualt = FormDataShemaRegister.safeParse(data);
   if (resualt.success) {
     var user = await User.findOne({ phone_number: data.phoneUsers });
@@ -47,7 +43,7 @@ export async function addEntryRegister(data: InputsRegister) {
   }
 }
 
-async function createUser(name: String, phone: String, password: any) {
+async function createUser(name, phone, password) {
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
   const user = new User({
@@ -58,12 +54,3 @@ async function createUser(name: String, phone: String, password: any) {
   const resualt = await user.save();
   return { success: true, data: user };
 }
-
-// export async function isLoggedIn(userId: string) {
-//   try {
-//     const user = await User.findById(userId);
-//     return user ? true : false;
-//   } catch (error) {
-//     return false;
-//   }
-// }
