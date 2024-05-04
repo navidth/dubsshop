@@ -9,9 +9,7 @@ export const metadata: Metadata = {
   title: "فروشگاه دابس",
   description: "فروشگاه انواع لوارم تنیس روی میز",
 };
-export const Iransens = localFont({
-  src: "../../../public/fonts/IRANSansWeb.ttf",
-});
+
 export default async function RootLayout({
   children,
 }: Readonly<{
