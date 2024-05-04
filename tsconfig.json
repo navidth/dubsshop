@@ -35,6 +35,6 @@
     "src/components/CardProduct.jsx",
     "src/components/CardSimilar.tsx",
     "src/components/DetailedProduct.jsx"
-, "src/app/[url]/[urlItems]/[name]/page.tsx", "src/app/lib/actions/_actionUsers.js"  ],
+, "src/app/[url]/[urlItems]/[name]/page.tsx", "src/app/lib/actions/_actionUsers.ts"  ],
   "exclude": ["node_modules"]
 }
