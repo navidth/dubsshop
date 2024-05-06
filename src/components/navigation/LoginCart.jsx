@@ -15,6 +15,12 @@ function LoginCart() {
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+  const [session, setSession] = useState();
+  useEffect(() => {
+    if (sessions) {
+      setSession(sessions);
+    }
+  }, []);
   const { products } = useSelector((state) => state.products);
   const productCount = products.reduce(
     (sum, product) => sum + product.quantity,
@@ -124,7 +130,7 @@ function LoginCart() {
         </Modal.Footer>
       </Modal>
       {/* login or register */}
-      {sessions ? (
+      {session ? (
         <Link
           href={"/dashboard/"}
           data-tooltip-content="پنل کاربری"

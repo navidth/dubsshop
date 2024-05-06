@@ -1,1 +1,2 @@
-export const sessions = localStorage.getItem("session");
+export const sessions =
+  typeof window !== "undefined" && window.localStorage.getItem("session");

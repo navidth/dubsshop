@@ -7,12 +7,27 @@ import ResualtCat from "@/components/ResualtCat";
 import Api from '@/utils/api'
 
 async function ProductShop({ params }) {
-  const res = await fetch(`${Api}/products/${params.url}`, {
-    cache: "no-cache",
+  // var res;
+  // const res = await fetch(`${Api}/products/${params.url}`, {
+  //   cache: "no-cache",
+  // });
+  // const data = await res.json();
+  // const { product = data.data, category } = data;
+  var res; // 1
+  await fetch(`${Api}/products/${params.url}`)
+  .then(function (response) {
+      res = response.clone(); // 2
+      return response.json();
+  })
+  .then(function (data) {
+      // Do something with data
+  }, function (rejectionReason) { // 3
+      console.log('Error parsing JSON from response:', rejectionReason, responseClone); // 4
+      responseClone.text() // 5
+      .then(function (bodyText) {
+          console.log('Received the following instead of valid JSON:', bodyText); // 6
+      });
   });
-  const data = await res.json();
-  const { product = data.data, category } = data;
-
   return (
     <main className="mt-5 d-flex mx-5">
       <section className="article me-3">
