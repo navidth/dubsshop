@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {clientPromise} = require('../db/mongodb')
+const {MongoDB} = require("../db/mongodb")
 const detailedItemSchema = new mongoose.Schema({
   attr: String,
   value: String,

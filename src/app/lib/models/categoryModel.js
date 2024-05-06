@@ -1,6 +1,6 @@
 "use server";
 const mongoose = require("mongoose");
-const {clientPromise} = require('../db/mongodb')
+const {MongoDB} = require("../db/mongodb")
 const subitemSchema = new mongoose.Schema({
   name: String,
   urlItems: String,

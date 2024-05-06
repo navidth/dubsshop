@@ -1,6 +1,6 @@
 "use server"
 const mongoose = require('mongoose')
-const {clientPromise} = require('../db/mongodb')
+const {MongoDB} = require("../db/mongodb")
 
 const accessorySchema = new mongoose.Schema({
       name: { type: String },
