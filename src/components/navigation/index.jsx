@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import Api from '@/utils/api'
 
 const Navigation = async () => {
-  const res = await fetch(`${Api}/category`,{
+  const res = await fetch(`${Api}/api/category`,{
     cache: "force-cache"
   });
   const data = await res.json();

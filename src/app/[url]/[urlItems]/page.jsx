@@ -8,7 +8,7 @@ import Api from '@/utils/api'
 
 async function PageItemsMenu({ params }) {
   const res = await fetch(
-    `${Api}/products/${params.url}`,
+    `${Api}/api/products/${params.url}`,
     {
       cache: "no-cache",
     }

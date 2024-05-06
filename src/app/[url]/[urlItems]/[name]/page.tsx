@@ -3,7 +3,7 @@ import "../../../../styles/detailed.css";
 import Api from "@/utils/api";
 
 async function page({ params }: { params: { name: any; url: String } }) {
-  var similar = await fetch(`${Api}/products/${params.url}`, {
+  var similar = await fetch(`${Api}/api/products/${params.url}`, {
     cache: "no-cache",
   });
   var dataSimilar = await similar.json();
