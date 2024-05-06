@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import { sessions } from "@/utils/isLoginIn";
+import { useEffect } from "react";
 
 type InputsRegister = z.infer<typeof FormDataShemaRegister>;
 
@@ -20,7 +22,11 @@ function Register() {
     resolver: zodResolver(FormDataShemaRegister),
   });
   const router = useRouter();
-
+  useEffect(() => {
+    if (sessions) {
+      router.push("/");
+    }
+  }, []);
   const onRegister: SubmitHandler<InputsRegister> = async (
     data: InputsRegister
   ) => {
@@ -30,9 +36,7 @@ function Register() {
         position: "top-right",
       });
       localStorage.setItem("session", JSON.stringify(resualt.success));
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
+      window.location.reload();
       return;
     }
     toast.error(resualt?.data, {

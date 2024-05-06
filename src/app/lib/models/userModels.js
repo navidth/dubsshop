@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {MongoDB} = require("../db/mongodb")
 
 const userSchema = new mongoose.Schema({
   nameUser: { type: String },
@@ -24,7 +25,7 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-let User;
+let User
 try {
   User = mongoose.model("User");
 } catch (error) {

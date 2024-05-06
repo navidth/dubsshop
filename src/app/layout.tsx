@@ -5,8 +5,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import Navigation from "../components/navigation/index";
 import Footer from "@/components/Footer";
 import Providers from '@/components/redux/Provider'
-import { ToastContainer } from "react-toastify";
-import"react-toastify/ReactToastify.css"
 
 export const metadata: Metadata = {
   title: "فروشگاه دابس",
@@ -28,7 +26,6 @@ export default async function RootLayout({
       <body className={` ${Iransens.className}`}>
         <Providers>
           <Navigation />
-          <ToastContainer />
           {children}
           <Footer />
         </Providers>

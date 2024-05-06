@@ -1,15 +1,10 @@
 "use server";
-import { z } from "zod";
-import { FormDataSchemaLogin, FormDataShemaRegister } from "../shema";
-import { User } from "../models/userModels";
-import bcrypt from "bcrypt";
+const { FormDataSchemaLogin, FormDataShemaRegister } = require("../shema");
+const { User } = require("../models/userModels");
+const bcrypt = require("bcrypt");
 
 
-type Inputs = z.infer<typeof FormDataSchemaLogin>;
-type InputsRegister = z.infer<typeof FormDataShemaRegister>;
-
-export async function addEntry(data: Inputs) {
-
+export async function addEntry(data) {
   const resualt = FormDataSchemaLogin.safeParse(data);
   if (resualt.success) {
     var user = await User.findOne({ phone_number: data.phone });
@@ -24,9 +19,9 @@ export async function addEntry(data: Inputs) {
     if (!isValid) {
       return { success: false, data: "اطلاعات وارد شده صحیح نمیباشد" };
     }
-    if(user && isValid) {
+    if (user && isValid) {
     }
-    return { success: true, data: user};
+    return { success: true, data: user };
   }
 
   if (resualt.error) {
@@ -34,7 +29,7 @@ export async function addEntry(data: Inputs) {
   }
 }
 
-export async function addEntryRegister(data: InputsRegister) {
+export async function addEntryRegister(data) {
   const resualt = FormDataShemaRegister.safeParse(data);
   if (resualt.success) {
     var user = await User.findOne({ phone_number: data.phoneUsers });
@@ -47,7 +42,7 @@ export async function addEntryRegister(data: InputsRegister) {
   }
 }
 
-async function createUser(name: String, phone: String, password: any) {
+async function createUser(name, phone, password) {
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
   const user = new User({

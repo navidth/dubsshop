@@ -9,13 +9,12 @@ import Button from "react-bootstrap/Button";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "../CartProduct";
-import {sessions} from "@/utils/isLoginIn"
+import { sessions } from "@/utils/isLoginIn";
 
 function LoginCart() {
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
-  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const productCount = products.reduce(
     (sum, product) => sum + product.quantity,

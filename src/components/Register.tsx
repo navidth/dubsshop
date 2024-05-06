@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FormDataSchemaLogin } from "@/app/lib/shema";
@@ -8,13 +9,17 @@ import { addEntry } from "@/app/lib/actions/_actionUsers";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import { useSelector, useDispatch } from "react-redux";
-
+import { sessions } from "@/utils/isLoginIn";
+import { useEffect } from "react";
 type Inputs = z.infer<typeof FormDataSchemaLogin>;
 
 function Register() {
   const router = useRouter();
-
+  useEffect(() => {
+    if (sessions) {
+      router.push("/");
+    }
+  }, []);
   const {
     register,
     handleSubmit,
@@ -32,16 +37,14 @@ function Register() {
         position: "top-right",
       });
       localStorage.setItem("session", JSON.stringify(resualt.success));
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000)
+      window.location.reload();
       return;
     }
     toast.error(resualt?.data, {
       position: "top-right",
     });
     reset();
-  }
+  };
 
   return (
     <div className="login-page  mx-auto pt-2 pb-3">

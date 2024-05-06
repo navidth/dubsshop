@@ -34,7 +34,10 @@
     "src/Data/GetData.tsx",
     "src/components/CardProduct.jsx",
     "src/components/CardSimilar.tsx",
-    "src/components/DetailedProduct.jsx"
-, "src/app/[url]/[urlItems]/[name]/page.tsx", "src/app/lib/actions/_actionUsers.ts"  ],
+    "src/components/DetailedProduct.jsx",
+    "src/app/[url]/[urlItems]/[name]/page.tsx",
+    "src/app/lib/actions/_actionUsers.تs",
+    "src/app/lib/models/userModels.js"
+, "src/app/lib/actions/_actionUsers.js"  ],
   "exclude": ["node_modules"]
 }

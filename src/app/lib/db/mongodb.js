@@ -10,4 +10,4 @@ const MongoDB = mongoose
   .catch((err) => {
     console.log("Error in DB connection: " + err);
   });
-module.exports = {MongoDB};
+module.exports = { MongoDB };
